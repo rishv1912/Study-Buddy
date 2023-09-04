@@ -65,7 +65,6 @@ def registerPage(request):
 
     return render(request, 'base/login_registration.html', {'form': form})
 
-
 def userProfile(request, pk):
     user = User.objects.get(id=pk)
     rooms = user.room_set.all()
@@ -74,7 +73,6 @@ def userProfile(request, pk):
     context = {'user': user, 'rooms': rooms,
                'room_messages': room_messages, 'topics': topics}
     return render(request, 'base/profile.html', context)
-
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -86,7 +84,6 @@ def home(request):
     context = {'rooms': rooms, 'topics': topics,
                'room_count': room_count, 'room_messages': room_messages}
     return render(request, 'base/home.html', context)
-
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
@@ -106,7 +103,6 @@ def room(request, pk):
     context = {'room': room, 'room_messages': room_messages,
                'participants': participants}
     return render(request, 'base/room.html', context)
-
 
 @login_required(login_url='/login')
 def createRoom(request):
@@ -132,7 +128,6 @@ def createRoom(request):
     context = {'form': form, 'topics': topics}
     return render(request, 'base/room_form.html', context)
 
-
 @login_required(login_url='/login')
 def updateRoom(request, pk):
     room = Room.objects.get(id=pk)
@@ -153,7 +148,6 @@ def updateRoom(request, pk):
     context = {'form': form, 'topics': topics}
     return render(request, 'base/room_form.html', context)
 
-
 @login_required(login_url='/login')
 def deleteRoom(request, pk):
     room = Room.objects.get(id=pk)
@@ -164,7 +158,6 @@ def deleteRoom(request, pk):
         return redirect('/')
 
     return render(request, 'base/delete.html', {'obj': room})
-
 
 @login_required(login_url='/login')
 def deleteMessage(request, pk):
@@ -183,7 +176,7 @@ def updateUser(request,pk):
     user = request.user
     form = UserForm(instance=user)
 
-    if request.method =='POST':
+    if request.method == 'POST':
         form = UserForm(request.POST,instance=user)
         if form.is_valid():
             form.save()
