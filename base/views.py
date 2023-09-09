@@ -48,7 +48,6 @@ def logoutUser(request):
     logout(request)
     return redirect('/')
 
-
 def registerPage(request):
     form = UserCreationForm()
 
